@@ -17,3 +17,8 @@ type MenuItem = {
   price: number;
 };
 
+// Check if the input is empty
+function isEmpty(value: string) {
+  return value.trim().length === 0;
+}
+
