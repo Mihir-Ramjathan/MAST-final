@@ -949,3 +949,159 @@ function ListSkills({
   );
 }
 
+// PAGE 4: Menu statistics
+function StatisticsScreen({
+  navigation,
+  menuItems
+}: any) {
+
+  let totalPrice = 0;
+  let starterCount = 0;
+  let mainCount = 0;
+  let dessertCount = 0;
+
+  // Calculate menu statistics
+  for (let i = 0; i < menuItems.length; i++) {
+
+    totalPrice = totalPrice + menuItems[i].price;
+
+    if (menuItems[i].course === 'Starter') {
+      starterCount++;
+    }
+
+    if (menuItems[i].course === 'Main Course') {
+      mainCount++;
+    }
+
+    if (menuItems[i].course === 'Dessert') {
+      dessertCount++;
+    }
+  }
+
+  // Calculate average price
+  let averagePrice = 0;
+
+  if (menuItems.length > 0) {
+    averagePrice = totalPrice / menuItems.length;
+  }
+
+  return (
+    <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+
+        {/* Statistics banner */}
+        <Image
+          source={require('./Images/statistics-banner.png')}
+          style={styles.bannerImage}
+          resizeMode="cover"
+        />
+
+        {/* Page heading */}
+        <View style={styles.heroSection}>
+
+          <Text style={styles.WelcomeTitle}>
+            Menu Statistics
+          </Text>
+
+          <Text style={styles.welcomeSubtitle}>
+            View an overview of your restaurant menu
+          </Text>
+
+        </View>
+
+        {/* Menu summary */}
+        <View style={styles.formCard}>
+
+          <Text style={styles.sectionTitle}>
+            Menu Summary
+          </Text>
+
+          {/* Total menu items */}
+          <View style={styles.statCard}>
+
+            <Text style={styles.statLabel}>
+              Total Menu Items
+            </Text>
+
+            <Text style={styles.statValue}>
+              {menuItems.length}
+            </Text>
+
+          </View>
+
+          {/* Average price */}
+          <View style={styles.statCard}>
+
+            <Text style={styles.statLabel}>
+              Average Price
+            </Text>
+
+            <Text style={styles.statValue}>
+              R{averagePrice.toFixed(2)}
+            </Text>
+
+          </View>
+
+          {/* Course statistics */}
+          <Text style={styles.sectionTitle}>
+            Course Breakdown
+          </Text>
+
+          {/* Starters */}
+          <View style={styles.statCard}>
+
+            <Text style={styles.statLabel}>
+              Starters
+            </Text>
+
+            <Text style={styles.statValue}>
+              {starterCount}
+            </Text>
+
+          </View>
+
+          {/* Main courses */}
+          <View style={styles.statCard}>
+
+            <Text style={styles.statLabel}>
+              Main Courses
+            </Text>
+
+            <Text style={styles.statValue}>
+              {mainCount}
+            </Text>
+
+          </View>
+
+          {/* Desserts */}
+          <View style={styles.statCard}>
+
+            <Text style={styles.statLabel}>
+              Desserts
+            </Text>
+
+            <Text style={styles.statValue}>
+              {dessertCount}
+            </Text>
+
+          </View>
+
+          {/* Back to menu */}
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={() => navigation.navigate('MainScreen')}
+          >
+            <Text style={styles.primaryButtonText}>
+              Back to Main Menu
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+      </ScrollView>
+
+    </SafeAreaView>
+  );
+}
+
