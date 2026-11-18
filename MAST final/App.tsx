@@ -746,3 +746,206 @@ function ViewDetails({
   );
 }
 
+// PAGE 3: Search and filter menu items
+function ListSkills({
+  navigation,
+  menuItems,
+  searchText,
+  setSearchText,
+  selectedValue,
+  setSelectedValue,
+  Success,
+  onEdit,
+  deleteId,
+  setDeleteId,
+  onDelete
+}: any) {
+
+  const filters = [
+    'All Courses',
+    'Starter',
+    'Main Course',
+    'Dessert'
+  ];
+
+  const filterButtons: ReactNode[] = [];
+
+  // Display filter options
+  for (let i = 0; i < filters.length; i++) {
+
+    filterButtons.push(
+      <TouchableOpacity
+        key={filters[i]}
+        style={[
+          styles.courseButton,
+          selectedValue === filters[i] &&
+            styles.selectedCourseButton
+        ]}
+        onPress={() => setSelectedValue(filters[i])}
+      >
+        <Text
+          style={[
+            styles.courseButtonText,
+            selectedValue === filters[i] &&
+              styles.selectedCourseButtonText
+          ]}
+        >
+          {filters[i]}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
+  // Search and filter menu items
+  const filteredItems: MenuItem[] = [];
+
+  for (let i = 0; i < menuItems.length; i++) {
+
+    const item = menuItems[i];
+
+    const matchesName = item.dishName
+      .toLowerCase()
+      .includes(searchText.trim().toLowerCase());
+
+    const matchesCourse =
+      selectedValue === 'All Courses' ||
+      item.course === selectedValue;
+
+    if (matchesName && matchesCourse) {
+      filteredItems.push(item);
+    }
+  }
+
+  return (
+    <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+
+        {/* Search and filter banner */}
+        <Image
+          source={require('./Images/search-banner.png')}
+          style={styles.bannerImage}
+          resizeMode="cover"
+        />
+
+        {/* Search section */}
+        <View style={styles.formCard}>
+
+          <Text style={styles.sectionTitle}>
+            Find Menu Items
+          </Text>
+
+          <Text style={styles.sectionSubtitle}>
+            Search by dish name or select a course
+          </Text>
+
+          {/* Search by name */}
+          <View style={styles.inputWrapper}>
+
+            <Text style={styles.inputLabel}>
+              Search Dish Name
+            </Text>
+
+            <TextInput
+              style={styles.modernInput}
+              placeholder="e.g. Chicken Pasta"
+              placeholderTextColor="#888"
+              value={searchText}
+              onChangeText={(newText) => setSearchText(newText)}
+            />
+
+          </View>
+
+          {/* Filter by course */}
+          <Text style={styles.inputLabel}>
+            Filter by Course
+          </Text>
+
+          <View style={styles.courseContainer}>
+            {filterButtons}
+          </View>
+
+          {/* Clear search and filters */}
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => {
+              setSearchText('');
+              setSelectedValue('All Courses');
+            }}
+          >
+            <Text style={styles.secondaryButtonText}>
+              Clear Search and Filter
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+        {/* Success message */}
+        {Success !== '' && (
+          <View style={styles.successBox}>
+
+            <Text style={styles.successText}>
+              {Success}
+            </Text>
+
+          </View>
+        )}
+
+        {/* Number of matching items */}
+        <View style={styles.resultsHeader}>
+
+          <Text style={styles.sectionTitle}>
+            Search Results
+          </Text>
+
+          <View style={styles.skillsCounter}>
+            <Text style={styles.skillsCounterText}>
+              {filteredItems.length}
+            </Text>
+          </View>
+
+        </View>
+
+        {/* Display search results */}
+        {filteredItems.length === 0 ? (
+
+          <View style={styles.emptyCard}>
+
+            <Text style={styles.emptyText}>
+              No matching menu items found.
+            </Text>
+
+            <Text style={styles.sectionSubtitle}>
+              Try another dish name or clear the filter.
+            </Text>
+
+          </View>
+
+        ) : (
+
+          <MenuItemsList
+            items={filteredItems}
+            onEdit={onEdit}
+            deleteId={deleteId}
+            setDeleteId={setDeleteId}
+            onDelete={onDelete}
+          />
+
+        )}
+
+        {/* Back to menu */}
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          onPress={() => navigation.navigate('MainScreen')}
+        >
+          <Text style={styles.secondaryButtonText}>
+            Back to Main Menu
+          </Text>
+        </TouchableOpacity>
+
+      </ScrollView>
+
+    </SafeAreaView>
+  );
+}
+
