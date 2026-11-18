@@ -175,3 +175,18 @@ export default function App() {
     navigation.navigate('ViewDetails');
   }
 
+  // Open the edit dish page
+  function editMenuItem(item: MenuItem, navigation: any) {
+
+    setDishName(item.dishName);
+    setDescription(item.description);
+    setCourse(item.course);
+    setPrice(String(item.price));
+    setEditId(item.id);
+    setError('');
+    setSuccess('');
+    setDeleteId(-1);
+
+    navigation.navigate('ViewDetails');
+  }
+
