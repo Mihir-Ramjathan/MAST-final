@@ -405,3 +405,150 @@ export default function App() {
   );
 }
 
+// PAGE 1: Main menu
+function MainScreen({
+  navigation,
+  menuItems,
+  Success,
+  onAdd,
+  onEdit,
+  deleteId,
+  setDeleteId,
+  onDelete
+}: any) {
+
+  return (
+    <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+
+        {/* Main app logo */}
+        <Image
+          source={require('./Images/logo.png')}
+          style={styles.logoImage}
+          resizeMode="contain"
+        />
+
+        {/* Home banner */}
+        <Image
+          source={require('./Images/home-banner.png')}
+          style={styles.bannerImage}
+          resizeMode="cover"
+        />
+
+        {/* Welcome message */}
+        <View style={styles.heroSection}>
+
+          <Text style={styles.WelcomeTitle}>
+            Welcome, Chef!
+          </Text>
+
+          <Text style={styles.welcomeSubtitle}>
+            Your restaurant menu in one place
+          </Text>
+
+        </View>
+
+        {/* Menu overview */}
+        <View style={styles.infoCard}>
+
+          <Text style={styles.infoTitle}>
+            Menu Overview
+          </Text>
+
+          <Text style={styles.infoText}>
+            Total menu items
+          </Text>
+
+          <Text style={styles.counterText}>
+            {menuItems.length}
+          </Text>
+
+        </View>
+
+        {/* Menu navigation */}
+        <View style={styles.formCard}>
+
+          <Text style={styles.sectionTitle}>
+            Menu Management
+          </Text>
+
+          <Text style={styles.sectionSubtitle}>
+            Choose what you would like to do
+          </Text>
+
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={onAdd}
+          >
+            <Text style={styles.primaryButtonText}>
+              + Add Menu Item
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => navigation.navigate('ListSkills')}
+          >
+            <Text style={styles.secondaryButtonText}>
+              Search and Filter Menu
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => navigation.navigate('StatisticsScreen')}
+          >
+            <Text style={styles.secondaryButtonText}>
+              View Menu Statistics
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+        {/* Success message */}
+        {Success !== '' && (
+          <View style={styles.successBox}>
+            <Text style={styles.successText}>
+              {Success}
+            </Text>
+          </View>
+        )}
+
+        {/* Display current menu */}
+        <Text style={styles.sectionTitle}>
+          Current Menu
+        </Text>
+
+        {menuItems.length === 0 ? (
+
+          <View style={styles.emptyCard}>
+
+            <Text style={styles.emptyText}>
+              No menu items have been added yet.
+            </Text>
+
+            <Text style={styles.sectionSubtitle}>
+              Select Add Menu Item to create your first dish.
+            </Text>
+
+          </View>
+
+        ) : (
+
+          <MenuItemsList
+            items={menuItems}
+            onEdit={onEdit}
+            deleteId={deleteId}
+            setDeleteId={setDeleteId}
+            onDelete={onDelete}
+          />
+
+        )}
+
+      </ScrollView>
+
+    </SafeAreaView>
+  );
+}
+
