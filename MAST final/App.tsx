@@ -552,3 +552,197 @@ function MainScreen({
   );
 }
 
+// PAGE 2: Add and edit dishes
+function ViewDetails({
+  navigation,
+  dishName,
+  setDishName,
+  description,
+  setDescription,
+  course,
+  setCourse,
+  price,
+  setPrice,
+  editId,
+  Error,
+  onSave,
+  clearForm
+}: any) {
+
+  const courses = ['Starter', 'Main Course', 'Dessert'];
+
+  const courseButtons: ReactNode[] = [];
+
+  // Display course options
+  for (let i = 0; i < courses.length; i++) {
+
+    courseButtons.push(
+      <TouchableOpacity
+        key={courses[i]}
+        style={[
+          styles.courseButton,
+          course === courses[i] &&
+            styles.selectedCourseButton
+        ]}
+        onPress={() => setCourse(courses[i])}
+      >
+        <Text
+          style={[
+            styles.courseButtonText,
+            course === courses[i] &&
+              styles.selectedCourseButtonText
+          ]}
+        >
+          {courses[i]}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+      >
+
+        {/* Add and edit banner */}
+        <Image
+          source={require('./Images/dish-banner.png')}
+          style={styles.bannerImage}
+          resizeMode="cover"
+        />
+
+        {/* Dish information form */}
+        <View style={styles.formCard}>
+
+          <Text style={styles.sectionTitle}>
+            {editId === -1
+              ? 'Add New Dish'
+              : 'Edit Menu Item'}
+          </Text>
+
+          <Text style={styles.sectionSubtitle}>
+            {editId === -1
+              ? 'Enter the new dish information below.'
+              : 'Update the existing dish information below.'}
+          </Text>
+
+          {/* Dish name */}
+          <View style={styles.inputWrapper}>
+
+            <Text style={styles.inputLabel}>
+              Dish Name
+            </Text>
+
+            <TextInput
+              style={styles.modernInput}
+              placeholder="Enter dish name"
+              placeholderTextColor="#888"
+              value={dishName}
+              onChangeText={(newText) => setDishName(newText)}
+            />
+
+          </View>
+
+          {/* Description */}
+          <View style={styles.inputWrapper}>
+
+            <Text style={styles.inputLabel}>
+              Description
+            </Text>
+
+            <TextInput
+              style={[
+                styles.modernInput,
+                styles.descriptionInput
+              ]}
+              placeholder="Enter a description"
+              placeholderTextColor="#888"
+              value={description}
+              multiline
+              onChangeText={(newText) => setDescription(newText)}
+            />
+
+          </View>
+
+          {/* Select course */}
+          <View style={styles.inputWrapper}>
+
+            <Text style={styles.inputLabel}>
+              Course
+            </Text>
+
+            <View style={styles.courseContainer}>
+              {courseButtons}
+            </View>
+
+          </View>
+
+          {/* Price input */}
+          <View style={styles.inputWrapper}>
+
+            <Text style={styles.inputLabel}>
+              Price (R)
+            </Text>
+
+            <TextInput
+              style={styles.modernInput}
+              placeholder="Enter price"
+              placeholderTextColor="#888"
+              keyboardType="decimal-pad"
+              value={price}
+              onChangeText={(newText) => setPrice(newText)}
+            />
+
+          </View>
+
+          {/* Error message */}
+          {Error !== '' && (
+            <View style={styles.errorBox}>
+
+              <Text style={styles.errorText}>
+                {Error}
+              </Text>
+
+            </View>
+          )}
+
+          {/* Save or update */}
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={() => {
+              if (onSave()) {
+                navigation.navigate('MainScreen');
+              }
+            }}
+          >
+            <Text style={styles.primaryButtonText}>
+              {editId === -1
+                ? 'Save Menu Item'
+                : 'Update Menu Item'}
+            </Text>
+          </TouchableOpacity>
+
+          {/* Cancel button */}
+          <TouchableOpacity
+            style={styles.cancelButton}
+            onPress={() => {
+              clearForm();
+              navigation.goBack();
+            }}
+          >
+            <Text style={styles.buttonText}>
+              Cancel
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+      </ScrollView>
+
+    </SafeAreaView>
+  );
+}
+
