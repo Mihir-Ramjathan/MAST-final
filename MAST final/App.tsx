@@ -190,3 +190,89 @@ export default function App() {
     navigation.navigate('ViewDetails');
   }
 
+  // Add or update a menu item
+  function saveMenuItem() {
+
+    // Check for empty fields
+    if (
+      isEmpty(dishName) ||
+      isEmpty(description) ||
+      isEmpty(course) ||
+      isEmpty(price)
+    ) {
+      setError('Please fill in all the fields.');
+      return false;
+    }
+
+    // Check the price
+    if (
+      isNaN(Number(price)) ||
+      !isFinite(Number(price)) ||
+      Number(price) <= 0
+    ) {
+      setError('Please enter a valid price greater than R0.');
+      return false;
+    }
+
+    // Check if the same dish already exists
+    const alreadyExist = menuItems.some(
+      (item) =>
+        item.dishName.toLowerCase() ===
+          dishName.trim().toLowerCase() &&
+        item.course === course &&
+        item.id !== editId
+    );
+
+    if (alreadyExist) {
+      setError('This dish already exists in this course.');
+      return false;
+    }
+
+    // Add a new menu item
+    if (editId === -1) {
+
+      const newItem: MenuItem = {
+        id: nextId,
+        dishName: dishName.trim(),
+        description: description.trim(),
+        course: course,
+        price: Number(price)
+      };
+
+      setMenuItems((currentItems) => [...currentItems, newItem]);
+
+      setNextId(nextId + 1);
+
+      setSuccess('Menu item added successfully.');
+
+    } else {
+
+      // Update an existing menu item
+      const updatedItems: MenuItem[] = [];
+
+      for (let i = 0; i < menuItems.length; i++) {
+
+        if (menuItems[i].id === editId) {
+
+          updatedItems.push({
+            id: menuItems[i].id,
+            dishName: dishName.trim(),
+            description: description.trim(),
+            course: course,
+            price: Number(price)
+          });
+
+        } else {
+          updatedItems.push(menuItems[i]);
+        }
+      }
+
+      setMenuItems(updatedItems);
+
+      setSuccess('Menu item updated successfully.');
+    }
+
+    clearForm();
+    return true;
+  }
+
