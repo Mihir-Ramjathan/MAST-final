@@ -1105,3 +1105,394 @@ function StatisticsScreen({
   );
 }
 
+// Application styling
+const styles = StyleSheet.create({
+
+  // Main background
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#F8F8F8',
+  },
+
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 40,
+  },
+
+  // Logo and banners
+  logoImage: {
+    width: 140,
+    height: 140,
+    alignSelf: 'center',
+    marginBottom: 15,
+    borderRadius: 15,
+  },
+
+  bannerImage: {
+    width: '100%',
+    height: 160,
+    borderRadius: 15,
+    marginBottom: 18,
+  },
+
+  // Welcome section
+  heroSection: {
+    backgroundColor: '#111111',
+    borderRadius: 18,
+    padding: 25,
+    marginBottom: 18,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+  },
+
+  WelcomeTitle: {
+    color: '#D4AF37',
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  welcomeSubtitle: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    marginTop: 8,
+    textAlign: 'center',
+  },
+
+  // Main cards
+  formCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+    elevation: 3,
+  },
+
+  sectionTitle: {
+    fontSize: 19,
+    fontWeight: 'bold',
+    color: '#111111',
+    marginBottom: 10,
+  },
+
+  sectionSubtitle: {
+    fontSize: 14,
+    color: '#555555',
+    marginBottom: 16,
+  },
+
+  // Menu overview
+  infoCard: {
+    backgroundColor: '#111111',
+    borderRadius: 14,
+    padding: 20,
+    marginBottom: 18,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+  },
+
+  infoTitle: {
+    color: '#D4AF37',
+    fontSize: 19,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+
+  infoText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+
+  counterText: {
+    color: '#D4AF37',
+    fontSize: 35,
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
+
+  // Input fields
+  inputWrapper: {
+    marginBottom: 16,
+  },
+
+  inputLabel: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#111111',
+    marginBottom: 8,
+  },
+
+  modernInput: {
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+    borderRadius: 9,
+    padding: 13,
+    backgroundColor: '#FFFFFF',
+    fontSize: 16,
+    color: '#111111',
+  },
+
+  descriptionInput: {
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+
+  // Course selection
+  courseContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 15,
+  },
+
+  courseButton: {
+    backgroundColor: '#FFFFFF',
+    borderColor: '#D4AF37',
+    borderWidth: 1,
+    borderRadius: 9,
+    padding: 10,
+    marginRight: 7,
+    marginBottom: 8,
+  },
+
+  selectedCourseButton: {
+    backgroundColor: '#111111',
+    borderColor: '#D4AF37',
+  },
+
+  courseButtonText: {
+    color: '#111111',
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+
+  selectedCourseButtonText: {
+    color: '#D4AF37',
+  },
+
+  // Main buttons
+  primaryButton: {
+    backgroundColor: '#D4AF37',
+    padding: 14,
+    borderRadius: 9,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+
+  primaryButtonText: {
+    color: '#111111',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  secondaryButton: {
+    backgroundColor: '#111111',
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+    borderRadius: 9,
+    padding: 13,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+
+  secondaryButtonText: {
+    color: '#D4AF37',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  buttonRow: {
+    flexDirection: 'row',
+    marginTop: 8,
+  },
+
+  // Menu item cards
+  menuCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 18,
+    borderRadius: 13,
+    marginBottom: 13,
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+    elevation: 2,
+  },
+
+  itemHeader: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+
+  dishTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#111111',
+    flex: 1,
+    marginRight: 10,
+  },
+
+  priceText: {
+    fontSize: 17,
+    color: '#8C6B00',
+    fontWeight: 'bold',
+  },
+
+  descriptionText: {
+    fontSize: 14,
+    color: '#555555',
+    marginTop: 9,
+    marginBottom: 12,
+  },
+
+  courseLabel: {
+    color: '#8C6B00',
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+
+  // Edit and delete buttons
+  editButton: {
+    flex: 1,
+    backgroundColor: '#8C6B00',
+    padding: 11,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginRight: 8,
+  },
+
+  deleteButton: {
+    flex: 1,
+    backgroundColor: '#ff0000',
+    padding: 11,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginRight: 5,
+  },
+
+  cancelButton: {
+    flex: 1,
+    backgroundColor: '#ff0000',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+
+  // Delete confirmation
+  confirmBox: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 12,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+  },
+
+  confirmText: {
+    color: '#111111',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+
+  // Error messages
+  errorBox: {
+    backgroundColor: '#FFFFFF',
+    borderColor: '#ff0000',
+    borderWidth: 2,
+    padding: 12,
+    borderRadius: 9,
+    marginBottom: 15,
+  },
+
+  errorText: {
+    color: '#ff0000',
+    fontWeight: 'bold',
+  },
+
+  // Success messages
+  successBox: {
+    backgroundColor: '#FFFFFF',
+    borderColor: '#0aa54d',
+    borderWidth: 2,
+    padding: 12,
+    borderRadius: 9,
+    marginBottom: 16,
+  },
+
+  successText: {
+    color: '#0aa54d',
+    fontWeight: 'bold',
+  },
+
+  // Empty menu messages
+  emptyCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 13,
+    padding: 25,
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+  },
+
+  emptyText: {
+    color: '#555555',
+    fontSize: 15,
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+
+  // Search results
+  resultsHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+
+  skillsCounter: {
+    backgroundColor: '#111111',
+    borderRadius: 8,
+    paddingHorizontal: 13,
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: '#D4AF37',
+  },
+
+  skillsCounterText: {
+    color: '#D4AF37',
+    fontWeight: 'bold',
+  },
+
+  // Statistics
+  statCard: {
+    backgroundColor: '#111111',
+    borderColor: '#D4AF37',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 19,
+    marginBottom: 14,
+  },
+
+  statLabel: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    marginBottom: 8,
+  },
+
+  statValue: {
+    fontSize: 29,
+    fontWeight: 'bold',
+    color: '#D4AF37',
+  },
+
+});
