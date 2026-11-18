@@ -167,3 +167,11 @@ export default function App() {
     setError('');
   }
 
+  // Open the add dish page
+  function addMenuItem(navigation: any) {
+    clearForm();
+    setSuccess('');
+    setDeleteId(-1);
+    navigation.navigate('ViewDetails');
+  }
+
