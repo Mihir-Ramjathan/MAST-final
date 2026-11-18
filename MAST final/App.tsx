@@ -132,3 +132,28 @@ function MenuItemsList({
   );
 }
 
+// Main application
+export default function App() {
+
+  // Store menu items
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+  // Input fields
+  const [dishName, setDishName] = useState('');
+  const [description, setDescription] = useState('');
+  const [course, setCourse] = useState('Starter');
+  const [price, setPrice] = useState('');
+
+  // Edit and delete
+  const [editId, setEditId] = useState(-1);
+  const [nextId, setNextId] = useState(1);
+  const [deleteId, setDeleteId] = useState(-1);
+
+  // Search and filter
+  const [searchText, setSearchText] = useState('');
+  const [selectedValue, setSelectedValue] = useState('All Courses');
+
+  // Messages
+  const [Error, setError] = useState('');
+  const [Success, setSuccess] = useState('');
+
