@@ -66,3 +66,69 @@ function MenuItemsList({
           {item.course}
         </Text>
 
+        {/* Edit and delete buttons */}
+        <View style={styles.buttonRow}>
+
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => onEdit(item)}
+          >
+            <Text style={styles.buttonText}>
+              Edit
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => setDeleteId(item.id)}
+          >
+            <Text style={styles.buttonText}>
+              Delete
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+        {/* Confirm before deleting */}
+        {deleteId === item.id && (
+          <View style={styles.confirmBox}>
+
+            <Text style={styles.confirmText}>
+              Are you sure you want to delete this dish?
+            </Text>
+
+            <View style={styles.buttonRow}>
+
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => onDelete(item.id)}
+              >
+                <Text style={styles.buttonText}>
+                  Yes, Delete
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => setDeleteId(-1)}
+              >
+                <Text style={styles.buttonText}>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        )}
+
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      {arrOutput}
+    </View>
+  );
+}
+
