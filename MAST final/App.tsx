@@ -276,3 +276,132 @@ export default function App() {
     return true;
   }
 
+  // Remove a menu item
+  function removeMenuItemHandler(id: number) {
+
+    setMenuItems((currentItems) =>
+      currentItems.filter((item) => item.id !== id)
+    );
+
+    setDeleteId(-1);
+
+    setSuccess('Menu item deleted successfully.');
+  }
+
+  // Navigation between pages
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+
+        <StatusBar style="light" />
+
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#111111'
+            },
+            headerTintColor: '#D4AF37',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+            headerShadowVisible: false
+          }}
+        >
+
+          {/* Page 1 - Main menu */}
+          <Stack.Screen
+            name="MainScreen"
+            options={{
+              title: "Chef's Menu Manager"
+            }}
+          >
+            {({ navigation }) => (
+              <MainScreen
+                navigation={navigation}
+                menuItems={menuItems}
+                Success={Success}
+                onAdd={() => addMenuItem(navigation)}
+                onEdit={(item: MenuItem) =>
+                  editMenuItem(item, navigation)
+                }
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                onDelete={removeMenuItemHandler}
+              />
+            )}
+          </Stack.Screen>
+
+          {/* Page 2 - Add and edit dishes */}
+          <Stack.Screen
+            name="ViewDetails"
+            options={{
+              title: 'Manage Dish'
+            }}
+          >
+            {({ navigation }) => (
+              <ViewDetails
+                navigation={navigation}
+                dishName={dishName}
+                setDishName={setDishName}
+                description={description}
+                setDescription={setDescription}
+                course={course}
+                setCourse={setCourse}
+                price={price}
+                setPrice={setPrice}
+                editId={editId}
+                Error={Error}
+                onSave={saveMenuItem}
+                clearForm={clearForm}
+              />
+            )}
+          </Stack.Screen>
+
+          {/* Page 3 - Search and filter */}
+          <Stack.Screen
+            name="ListSkills"
+            options={{
+              title: 'Search and Filter'
+            }}
+          >
+            {({ navigation }) => (
+              <ListSkills
+                navigation={navigation}
+                menuItems={menuItems}
+                searchText={searchText}
+                setSearchText={setSearchText}
+                selectedValue={selectedValue}
+                setSelectedValue={setSelectedValue}
+                Success={Success}
+                onEdit={(item: MenuItem) =>
+                  editMenuItem(item, navigation)
+                }
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                onDelete={removeMenuItemHandler}
+              />
+            )}
+          </Stack.Screen>
+
+          {/* Page 4 - Menu statistics */}
+          <Stack.Screen
+            name="StatisticsScreen"
+            options={{
+              title: 'Menu Statistics'
+            }}
+          >
+            {({ navigation }) => (
+              <StatisticsScreen
+                navigation={navigation}
+                menuItems={menuItems}
+              />
+            )}
+          </Stack.Screen>
+
+        </Stack.Navigator>
+
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}
+
