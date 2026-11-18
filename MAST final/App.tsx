@@ -157,3 +157,13 @@ export default function App() {
   const [Error, setError] = useState('');
   const [Success, setSuccess] = useState('');
 
+  // Clear all form fields
+  function clearForm() {
+    setDishName('');
+    setDescription('');
+    setCourse('Starter');
+    setPrice('');
+    setEditId(-1);
+    setError('');
+  }
+
